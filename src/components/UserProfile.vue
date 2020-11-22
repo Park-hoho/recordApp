@@ -6,9 +6,27 @@
       admin
     </div>
     <strong>Followers : </strong>{{followers}}
+    <form class="form-twoot">
+      <label for="newToot">New Twoot</label>
+      <textarea id="newToot" cols="30" rows="10"></textarea>
+      <div>
+        <label for="newTwootType"></label>
+        <select id="newTwootType">
+          <option :value="option.value" v-for="(option, index) in twootTypes" :key="index">
+            {{ option.name }}
+          </option>
+        </select>
+      </div>
+    </form>
   </div>
   <!--(twoot, index) key=index index 넣어도 됨-->
-  <TwootItem v-for="twoot in user.twoots" :key="twoot.id" :username="user.username" :twoot="twoot" @favourite="toggleFavourite" />
+  <TwootItem
+      v-for="twoot in user.twoots"
+      :key="twoot.id"
+      :username="user.username"
+      :twoot="twoot"
+      @favourite="toggleFavourite"
+  />
 </template>
 
 <script>
@@ -21,6 +39,10 @@ export default {
   },
   data() {
     return {
+      twootTypes: [
+        { value: 'draft', name: 'Darft'},
+        { value: 'instant', name: 'Instant Twoot'},
+      ],
       followers: 0,
       user: {
         id: 1,
@@ -74,5 +96,13 @@ export default {
     background-color: black;
     color: white;
     padding: 2px 4px;
+  }
+
+  .form-twoot {
+    margin-top: 32px;
+  }
+
+  .form-twoot > label {
+    display: block;
   }
 </style>

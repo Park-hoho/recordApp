@@ -21,7 +21,6 @@ export default {
   methods: {
     favouriteTwoot(id) {
       this.$emit('favourite', id)
-      console.log(twoot)
     }
   }
 };
