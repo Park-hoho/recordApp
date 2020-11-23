@@ -6,17 +6,20 @@
       admin
     </div>
     <strong>Followers : </strong>{{followers}}
-    <form class="form-twoot">
+    <form class="form-twoot" @submit.prevent="createNewTwoot">
       <label for="newToot">New Twoot</label>
-      <textarea id="newToot" cols="30" rows="10"></textarea>
+      <textarea id="newToot" cols="30" rows="10" v-model="newTwootContent" />
       <div>
         <label for="newTwootType"></label>
-        <select id="newTwootType">
+        <select id="newTwootType" v-model="selectedTwootType">
           <option :value="option.value" v-for="(option, index) in twootTypes" :key="index">
             {{ option.name }}
           </option>
         </select>
       </div>
+      <button>
+        Twoot!
+      </button>
     </form>
   </div>
   <!--(twoot, index) key=index index 넣어도 됨-->
@@ -39,6 +42,8 @@ export default {
   },
   data() {
     return {
+      newTwootContent: '',
+      selectedTwootType: 'instant',
       twootTypes: [
         { value: 'draft', name: 'Darft'},
         { value: 'instant', name: 'Instant Twoot'},
@@ -76,6 +81,15 @@ export default {
     },
     toggleFavourite(id) {
       console.log(id);
+    },
+    createNewTwoot() {
+      if (this.newTwootContent && this.selectedTwootType !== 'draft') {
+        this.user.twoots.unshift({
+          id: this.user.twoots.length + 1,
+          content: this.newTwootContent
+        })
+        this.newTwootContent = '';
+      }
     }
   },
   mounted() { // vue 에서 라이플 사이클 찾아보기
