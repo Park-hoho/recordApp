@@ -14,8 +14,8 @@ export default {
   },
 }
 </script>
-
-<style>
+<!--global 스타일링 하는 방법-->
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

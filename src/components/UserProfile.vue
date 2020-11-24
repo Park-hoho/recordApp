@@ -6,8 +6,9 @@
       admin
     </div>
     <strong>Followers : </strong>{{followers}}
-    <form class="form-twoot" @submit.prevent="createNewTwoot">
-      <label for="newToot">New Twoot</label>
+<!--    그냥 클래스가 아니고 다이나믹한 클래스로 -->
+    <form class="form-twoot" @submit.prevent="createNewTwoot" :class="{ '--exceeded': newTwootCharacterCount > 180}">
+      <label for="newToot">New Twoot ({{ newTwootCharacterCount }}/180)</label>
       <textarea id="newToot" cols="30" rows="10" v-model="newTwootContent" />
       <div>
         <label for="newTwootType"></label>
@@ -73,6 +74,9 @@ export default {
   computed: {
     fullName() {
       return `${this.user.firstName} ${this.user.lastName}`;
+    },
+    newTwootCharacterCount() {
+      return this.newTwootContent.length;
     }
   },
   methods: {
@@ -97,8 +101,10 @@ export default {
   }
 }
 </script>
-
-<style>
+<!--style에 scoped를 붙이면 로컬로 적용된다.-->
+<!--node-sass랑 sass-loader 설치해서 scss를 사용한다.-->
+<!--그 다음 lang="scss" 붙이면 쓸수있다.-->
+<style scoped>
   .user {
     width: 100%;
     height: 340px;
@@ -118,5 +124,10 @@ export default {
 
   .form-twoot > label {
     display: block;
+  }
+
+  .--exceeded {
+    color: red;
+    border-color: red;
   }
 </style>

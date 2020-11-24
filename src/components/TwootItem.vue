@@ -26,7 +26,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
  .twoot {
    margin: 8px 0;
    padding: 8px 0;
