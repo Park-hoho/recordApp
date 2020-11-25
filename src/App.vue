@@ -5,6 +5,7 @@
 </template>
 
 <script>
+
 import UserProfile from './components/UserProfile'; // import 부분에 괄호 쓰면 안됨
 
 export default {
