@@ -1,4 +1,4 @@
-# recordapp
+# twotter-tutorial
 
 ## Project setup
 ```
